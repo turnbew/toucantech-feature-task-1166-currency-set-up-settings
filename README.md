@@ -1,4 +1,4 @@
-TASK DATE: 23.11.2017
+TASK DATE: 23.10.2017 - FINISHED: 27.10.2017
 
 TASK SHORT DESCRIPTION: 1166 (Currency toggle in settings > set up settings)
 
@@ -10,23 +10,23 @@ CHANGES
 
 	IN FILES: 
 	
-		Added new file: C:\toucantech.dev\network-site\addons\default\modules\network_settings\models\general_setups_m.php
+		Added new file: \network-site\addons\default\modules\network_settings\models\general_setups_m.php
 		
 		
-		Added new file: C:\toucantech.dev\network-site\addons\default\modules\network_settings\views\general_settings\general_setups.php
+		Added new file: \network-site\addons\default\modules\network_settings\views\general_settings\general_setups.php
 	
 	
-		Added new file: C:\toucantech.dev\network-site\addons\default\themes\toucantechV2\css\buttons-multiply-layers.css
+		Added new file: \network-site\addons\default\themes\toucantechV2\css\buttons-multiply-layers.css
 	
 	
-		C:\toucantech.dev\network-site\addons\default\themes\toucantechV2\css\fundraising-plugin.css
+		\network-site\addons\default\themes\toucantechV2\css\fundraising-plugin.css
 		
 			ADDED CODE: 
 			
 				@import url("buttons-multiply-layers.css");
 	
 	
-		C:\toucantech.dev\network-site\addons\default\modules\fundraising\views\partials\donate_form_payment.php
+		\network-site\addons\default\modules\fundraising\views\partials\donate_form_payment.php
 		
 			CHANGE CODE: 
 			
@@ -35,23 +35,23 @@ CHANGES
 					TO: <input type="hidden" name="currency_code" value="<?=default_currency?>">
 
 		
-		C:\toucantech.dev\network-site\addons\default\themes\toucantechV2\css\supportus.css
-		C:\toucantech.dev\network-site\addons\default\themes\toucantechV2\css\fundraising-plugin.css
+		\network-site\addons\default\themes\toucantechV2\css\supportus.css
+		\network-site\addons\default\themes\toucantechV2\css\fundraising-plugin.css
 			
 			ADDED CODE: 
 					
 					@import url("../../../modules/fundraising/css/buttons-multiply-layers.css");
 
 					
-		C:\toucantech.dev\network-site\addons\default\modules\fundraising\css\supportus.css
-		C:\toucantech.dev\network-site\addons\default\modules\network_settings\css\fundraising.css
+		\network-site\addons\default\modules\fundraising\css\supportus.css
+		\network-site\addons\default\modules\network_settings\css\fundraising.css
 			
 			ADDED CODE:
 			
 					@import url("../../fundraising/css/buttons-multiply-layers.css");
 					
 		
-		C:\toucantech.dev\network-site\addons\default\modules\fundraising\css\fundraising.css
+		\network-site\addons\default\modules\fundraising\css\fundraising.css
 		
 			
 			ADDED CODE: 
@@ -59,7 +59,7 @@ CHANGES
 					@import url("buttons-multiply-layers.css");
 		
 					
-		C:\toucantech.dev\network-site\addons\default\modules\firesale\details.php
+		\network-site\addons\default\modules\firesale\details.php
 		
 			Added code 1:
 	
@@ -111,7 +111,7 @@ CHANGES
 				}	
 				
 	
-		C:\toucantech.dev\network-site\addons\default\modules\network_settings\views\general_settings\partials\menu.php		
+		\network-site\addons\default\modules\network_settings\views\general_settings\partials\menu.php		
 			
 			added\changed code: 
 			
@@ -126,7 +126,7 @@ CHANGES
 		
 
 		
-		C:\toucantech.dev\network-site\addons\default\modules\network_settings\config\routes.php
+		\network-site\addons\default\modules\network_settings\config\routes.php
 		
 		
 			added/changed code: 
@@ -137,7 +137,7 @@ CHANGES
 					$route['network_settings/general_settings/terms-conditions'] = 'general_settings/terms_conditions';
 	
 	
-		C:\toucantech.dev\network-site\addons\default\modules\network_settings\views\fundraising\setup\index.php
+		\network-site\addons\default\modules\network_settings\views\fundraising\setup\index.php
 		
 		
 		deleted code: 
@@ -151,7 +151,7 @@ CHANGES
 			
 			
 			
-		C:\toucantech.dev\network-site\addons\default\modules\network_settings\controllers\general_settings.php	
+		\network-site\addons\default\modules\network_settings\controllers\general_settings.php	
 	
 		deleted code: 
 		
@@ -258,7 +258,7 @@ CHANGES
 				
 					
 		
-		C:\toucantech.dev\network-site\addons\shared_addons\libraries\Options.php
+		\network-site\addons\shared_addons\libraries\Options.php
 		
 			added code: 
 			
@@ -276,7 +276,7 @@ CHANGES
 				}
 	
 	
-		C:\toucantech.dev\network-site\system\cms\core\MY_Controller.php
+		\network-site\system\cms\core\MY_Controller.php
 		
 		
 			added code: 
@@ -288,7 +288,7 @@ CHANGES
 	
 
 
-		C:\toucantech.dev\network-site\addons\default\modules\fundraising\views\plugin\sidebar.php
+		\network-site\addons\default\modules\fundraising\views\plugin\sidebar.php
 		
 		
 			added/changed code at 9 places: 
@@ -299,7 +299,7 @@ CHANGES
 				</div>
 				
 		
-		C:\toucantech.dev\network-site\addons\default\modules\fundraising\views\partials\active_campaigns.php
+		\network-site\addons\default\modules\fundraising\views\partials\active_campaigns.php
 		
 		
 			added/changed code at 7 places: 
@@ -309,68 +309,68 @@ CHANGES
 							<div class="currency"><?=default_currency_html_entity?></div>
 						</div>	
 			
-		C:\toucantech.dev\network-site\addons\default\modules\fundraising\views\partials\news_tagged_campaigns.php
-		C:\toucantech.dev\network-site\addons\default\modules\fundraising\views\supportus.php
-		C:\toucantech.dev\network-site\addons\default\modules\network_settings\views\content\preview.php
-		C:\toucantech.dev\network-site\addons\default\modules\network_settings\views\fundraising\campaigns\snapshot.php
-		C:\toucantech.dev\network-site\addons\default\modules\network_settings\views\fundraising\donations\load_more_donation.php
-		C:\toucantech.dev\network-site\addons\default\modules\network_settings\views\fundraising\donations\member_profile.php
-		C:\toucantech.dev\network-site\addons\default\modules\network_settings\views\fundraising\index.php
-		C:\toucantech.dev\network-site\addons\default\modules\network_settings\views\fundraising\partials\child_donations_table.php
-		C:\toucantech.dev\network-site\addons\default\modules\network_settings\views\fundraising\partials\sub_campaigns_table.php
-		C:\toucantech.dev\network-site\addons\default\modules\network_settings\views\fundraising\rewards\index.php
-		C:\toucantech.dev\network-site\addons\default\modules\network_settings\views\fundraising\setup\index.php
-		C:\toucantech.dev\network-site\addons\default\modules\fundraising\views\partials\gift_aid_final.php
-		C:\toucantech.dev\network-site\addons\default\modules\fundraising\views\partials\active_campaigns.php
-		C:\toucantech.dev\network-site\addons\default\modules\fundraising\views\partials\campaign.php
-		C:\toucantech.dev\network-site\addons\default\modules\fundraising\views\partials\donate_form.php
-		C:\toucantech.dev\network-site\addons\default\modules\fundraising\views\partials\give_online_second.php
-		C:\toucantech.dev\network-site\addons\default\modules\fundraising\views\partials\give_online.php
-		C:\toucantech.dev\network-site\addons\default\modules\bbevents\views\event_sign_up2.php
-		C:\toucantech.dev\network-site\addons\default\modules\fundraising\views\mysupport.php
-		C:\toucantech.dev\network-site\addons\default\modules\firesale\views\cart.php
+		\network-site\addons\default\modules\fundraising\views\partials\news_tagged_campaigns.php
+		\network-site\addons\default\modules\fundraising\views\supportus.php
+		\network-site\addons\default\modules\network_settings\views\content\preview.php
+		\network-site\addons\default\modules\network_settings\views\fundraising\campaigns\snapshot.php
+		\network-site\addons\default\modules\network_settings\views\fundraising\donations\load_more_donation.php
+		\network-site\addons\default\modules\network_settings\views\fundraising\donations\member_profile.php
+		\network-site\addons\default\modules\network_settings\views\fundraising\index.php
+		\network-site\addons\default\modules\network_settings\views\fundraising\partials\child_donations_table.php
+		\network-site\addons\default\modules\network_settings\views\fundraising\partials\sub_campaigns_table.php
+		\network-site\addons\default\modules\network_settings\views\fundraising\rewards\index.php
+		\network-site\addons\default\modules\network_settings\views\fundraising\setup\index.php
+		\network-site\addons\default\modules\fundraising\views\partials\gift_aid_final.php
+		\network-site\addons\default\modules\fundraising\views\partials\active_campaigns.php
+		\network-site\addons\default\modules\fundraising\views\partials\campaign.php
+		\network-site\addons\default\modules\fundraising\views\partials\donate_form.php
+		\network-site\addons\default\modules\fundraising\views\partials\give_online_second.php
+		\network-site\addons\default\modules\fundraising\views\partials\give_online.php
+		\network-site\addons\default\modules\bbevents\views\event_sign_up2.php
+		\network-site\addons\default\modules\fundraising\views\mysupport.php
+		\network-site\addons\default\modules\firesale\views\cart.php
 		
 		
 			CHANGE: FROM: £ TO: <?=default_currency_html_entity?>
 			
 
 		
-		C:\toucantech.dev\network-site\addons\default\modules\network_settings\views\content\tables\event-ticket-type.php
-		C:\toucantech.dev\network-site\addons\default\modules\bbevents\views\registration_success.php
-		C:\toucantech.dev\network-site\addons\default\modules\bbevents\controllers\bbevents.php
-		C:\toucantech.dev\network-site\addons\default\modules\bbevents\models\bbevent_m.phpű
-		C:\toucantech.dev\network-site\addons\default\modules\firesale\details.php
-		C:\toucantech.dev\network-site\addons\default\modules\fundraising\controllers\fundraising.php
-		C:\toucantech.dev\network-site\addons\default\modules\network_settings\controllers\content.php
+		\network-site\addons\default\modules\network_settings\views\content\tables\event-ticket-type.php
+		\network-site\addons\default\modules\bbevents\views\registration_success.php
+		\network-site\addons\default\modules\bbevents\controllers\bbevents.php
+		\network-site\addons\default\modules\bbevents\models\bbevent_m.phpű
+		\network-site\addons\default\modules\firesale\details.php
+		\network-site\addons\default\modules\fundraising\controllers\fundraising.php
+		\network-site\addons\default\modules\network_settings\controllers\content.php
 		
 		
 			CHANGE: FROM: "£" TO: default_currency_html_entity
 
 		
-		C:\toucantech.dev\network-site\addons\default\modules\fundraising\views\partials\give_form.php
-		C:\toucantech.dev\network-site\addons\default\modules\fundraising\views\partials\give_blank_form.php
-		C:\toucantech.dev\network-site\addons\default\modules\fundraising\views\partials\gift_form.php		
+		\network-site\addons\default\modules\fundraising\views\partials\give_form.php
+		\network-site\addons\default\modules\fundraising\views\partials\give_blank_form.php
+		\network-site\addons\default\modules\fundraising\views\partials\gift_form.php		
 			
 
 			CHANGE: FROM: "£ GBP" TO: default_currency_html_entity ." " . default_currency
 					
 					
 					
-		C:\toucantech.dev\network-site\addons\default\modules\jobs\models\jobs_m.php
+		\network-site\addons\default\modules\jobs\models\jobs_m.php
 		
 		
 			CHANGE CODE: FROM:  if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $keyword)) 
 						 TO :  if (preg_match('/[\'^£$€%&*()}{@#~?><>,|=_+¬-]/', $keyword)) 
 						 
 						 
-		C:\toucantech.dev\network-site\addons\default\modules\network_settings\controllers\invite_import.php
+		\network-site\addons\default\modules\network_settings\controllers\invite_import.php
 		
 		
 			CHANGE CODE: FROM:  '£200 Deposit '  => array(
 						 TO :   default_currency_html_entity . '200 Deposit '  => array(
 						 
 						 
-		C:\toucantech.dev\network-site\addons\default\modules\fundraising\models\campaigns_m.php
+		\network-site\addons\default\modules\fundraising\models\campaigns_m.php
 		
 			
 			CHANGE CODE: FROM:
@@ -389,7 +389,7 @@ CHANGES
 								$sql .= ", CONCAT(campaign_widget_quick5_text, ' (', '" . default_currency_html_entity . "' , campaign_widget_quick5_amount,')') AS customDonationText5";
 	
 	
-		C:\toucantech.dev\network-site\addons\default\modules\fundraising\details.php
+		\network-site\addons\default\modules\fundraising\details.php
 		
 		
 			CHANGE CODE: FROM: 
