@@ -1,4 +1,4 @@
-TASK DATE: 23.10.2017 - FINISHED: 27.10.2017
+TASK DATE: 23.10.2017 - FINISHED: 08.10.2017
 
 TASK SHORT DESCRIPTION: 1166 (Currency toggle in settings > set up settings)
 
@@ -18,6 +18,121 @@ CHANGES
 	
 		Added new file: \network-site\addons\default\themes\toucantechV2\css\buttons-multiply-layers.css
 	
+	
+		\network-site\addons\default\modules\bbevents\views\event_sign_up2.php
+		
+			ADDED CHANGED CODE:
+			
+				//Inside: function populate_summary()
+				
+				var txt = document.createElement("textarea");
+				txt.innerHTML = '<?=default_currency_html_entity?>';
+				var currency_entity = txt.value;
+				
+				
+	
+		\network-site\addons\default\modules\bbevents\controllers\bbevents.php
+		
+		CHANGED CODE:
+		
+			FROM:   'currency_code' => 'GBP',
+			
+			TO:  'currency_code' => default_currency,
+	
+		\network-site\addons\default\modules\network_settings\views\members\form.php
+		
+			CHANGED CODE:
+			
+				//At 8 places
+				FROM:
+				
+					&pound;
+					
+				TO: 
+		
+					<?php echo $fundraising_default_currency_entity . " " . ...
+					
+					
+		\network-site\addons\default\modules\network_settings\controllers\members.php
+	
+			ADDED CODE: 
+			
+				//Inside edit function
+				$this->load->library('Options');
+				.....
+				
+				$entities = $this->options->currency_html_entities();
+				.....
+				
+				->set('fundraising_default_currency_entity', $entities[Settings::get('fundraising_default_currency')])
+	
+		\network-site\addons\default\modules\firesale\controllers\front_cart.php
+		
+			ADDED CODE: 
+			
+				$input['currency_name'] = default_currency; //Inside checkout() function
+	
+	
+		\network-site\addons\default\modules\firesale\models\orders_m.php
+	
+			CHANGED CODE: 
+			
+				FROM: 
+				
+					public function format_order($orders)
+					{
+						// Get product count
+						foreach ($orders AS &$order) {
+
+							// Get product count
+							$order['products'] = $this->pyrocache->model('orders_m', 'get_product_count', array($order['id']), $this->firesale->cache_time);
+
+							// No currency set?
+							if ($order['currency'] == NULL) {
+								$order['currency'] = $this->pyrocache->model('currency_m', 'get', array(), $this->firesale->cache_time);
+							}
+							
+							// Format prices
+							$order['price_sub']   = $this->pyrocache->model('currency_m', 'format_string', array($order['price_sub'],   (object) $order['currency'], FALSE), $this->firesale->cache_time);
+							$order['price_ship']  = $this->pyrocache->model('currency_m', 'format_string', array($order['price_ship'],  (object) $order['currency'], FALSE), $this->firesale->cache_time);
+							$order['price_total'] = $this->pyrocache->model('currency_m', 'format_string', array($order['price_total'], (object) $order['currency'], FALSE), $this->firesale->cache_time);
+						}
+
+						return $orders;
+					}				
+	
+	
+				TO: 
+				
+					public function format_order($orders)
+					{
+						$this->load->library('Options');
+						$entities = $this->options->currency_html_entities();						
+
+						// Get product count
+						foreach ($orders AS &$order) {
+
+							// Get product count
+							$order['products'] = $this->pyrocache->model('orders_m', 'get_product_count', array($order['id']), $this->firesale->cache_time);
+
+							// No currency set?
+							if ($order['currency'] == NULL) {
+								$order['currency'] = $this->pyrocache->model('currency_m', 'get', array(), $this->firesale->cache_time);
+							}
+										
+							//check that was given unique currency at the order
+							if ($order['currency_name'] != '') {
+								$order['currency']['cur_format'] =  str_replace($entities, $entities[$order['currency_name']], $order['currency']['cur_format']);
+							}	
+							
+							// Format prices
+							$order['price_sub']   = $this->pyrocache->model('currency_m', 'format_string', array($order['price_sub'],   (object) $order['currency'], FALSE), $this->firesale->cache_time);
+							$order['price_ship']  = $this->pyrocache->model('currency_m', 'format_string', array($order['price_ship'],  (object) $order['currency'], FALSE), $this->firesale->cache_time);
+							$order['price_total'] = $this->pyrocache->model('currency_m', 'format_string', array($order['price_total'], (object) $order['currency'], FALSE), $this->firesale->cache_time);
+						}
+
+						return $orders;
+					}
 	
 		\network-site\addons\default\themes\toucantechV2\css\fundraising-plugin.css
 		
@@ -63,9 +178,22 @@ CHANGES
 		
 			Added code 1:
 	
-				 // Add new table with two basic records
-				if ($old_version < '1.2.9') {
-					$this->_install_general_setups_table($this->_install_general_setups_basic_records());	
+				if ($old_version < '2.0.11') 
+				{
+					$this->_install_general_setups_table($this->_install_general_setups_added_records());
+
+					$table = $this->db->dbprefix('firesale_orders');
+					
+					if (!$this->db->field_exists('currency_name', $table)) 
+					{
+						$sql =  "ALTER TABLE " . $table . " " . 
+								"	ADD COLUMN currency_name VARCHAR(10) NULL DEFAULT 'GBP' " .
+								"	AFTER shipping";
+						
+						return $this->db->query($sql);		
+					}
+					
+					return true;
 				}
 				
 				
@@ -84,30 +212,49 @@ CHANGES
 					);	
 
 					if (count($records) > 0) 
+					{ 
+						$table = $this->db->dbprefix('general_setups');
 						foreach ($records as $key => $record) 
-							$this->db->insert($this->db->dbprefix('general_setups'), $record);
+						{
+							$num = $this->db
+											->select('count(*) as num')
+											->from($table)
+											->where('slug', $record['slug'])
+											->get()
+											->row()
+											->num;		
+							if ($num == 0) {
+								$this->db->insert($table, $record);
+							}
+						}
+					}
 				}
 				
 				
 				
-				protected function _install_general_setups_basic_records() 
+				protected function _install_general_setups_added_records() 
 				{
 					$now = time(); 			
 						
-					return	array (	
-								array (
-									'slug' => 'default_currency',
-									'value' => 'GBP', 
-									'updated_on' => $now,
-									'last_updated_by' => $this->current_user->id
-								), 
-								array (
-									'slug' => 'default_currency_html_entity',
-									'value' => '&#163;', 
-									'updated_on' => $now,
-									'last_updated_by' => $this->current_user->id
-								) 
-							);
+					return	array (
+								'slug' => 'default_currency',
+								'value' => 'GBP', 
+								'updated_on' => $now,
+								'last_updated_by' => $this->current_user->id
+							), 
+							array (
+								'slug' => 'default_currency_html_entity',
+								'value' => '&#163;', 
+								'updated_on' => $now,
+								'last_updated_by' => $this->current_user->id
+							) , 
+							array (
+								'slug' => 'default_timezone',
+								'value' => 'Europe/London;', 
+								'updated_on' => $now,
+								'last_updated_by' => $this->current_user->id
+							) 
+						);
 				}	
 				
 	
@@ -306,7 +453,7 @@ CHANGES
 					
 						<div class="col-md-3 col-sm-3 donation-button-with-currency" style="min-width: 50px;">
 							<div class="image"><img src="/addons/default/themes/toucantechV2/img/icon-heart-widget-empty.png" alt=""></div>
-							<div class="currency"><?=default_currency_html_entity?></div>
+							<div class="currency">	</div>
 						</div>	
 			
 		\network-site\addons\default\modules\fundraising\views\partials\news_tagged_campaigns.php
