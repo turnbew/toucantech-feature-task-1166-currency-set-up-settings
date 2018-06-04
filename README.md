@@ -1,25 +1,23 @@
+FOR PRIVACY AND CODE PROTECTING REASONS THIS IS A SIMPLIFIED VERSION OF CHANGES AND NEW FEATURES
+
 TASK DATE: 23.10.2017 - FINISHED: 08.10.2017
+
+TASK LEVEL: (HARD)  
 
 TASK SHORT DESCRIPTION: 1166 (Currency toggle in settings > set up settings)
 
 GITHUB REPOSITORY CODE: feature/task-1166-currency-set-up-settings
 
-ORIGINAL WORK: https://github.com/BusinessBecause/network-site/tree/feature/task-1166-currency-set-up-settings
-
 CHANGES
 
+	ADDED new files 
+			general_setups_m.php
+			general_setups.php
+			buttons-multiply-layers.css
+	
 	IN FILES: 
 	
-		Added new file: \network-site\addons\default\modules\network_settings\models\general_setups_m.php
-		
-		
-		Added new file: \network-site\addons\default\modules\network_settings\views\general_settings\general_setups.php
-	
-	
-		Added new file: \network-site\addons\default\themes\toucantechV2\css\buttons-multiply-layers.css
-	
-	
-		\network-site\addons\default\modules\bbevents\views\event_sign_up2.php
+		vent_sign_up2.php
 		
 			ADDED CHANGED CODE:
 			
@@ -31,7 +29,7 @@ CHANGES
 				
 				
 	
-		\network-site\addons\default\modules\bbevents\controllers\bbevents.php
+		bbevents.php
 		
 		CHANGED CODE:
 		
@@ -39,7 +37,7 @@ CHANGES
 			
 			TO:  'currency_code' => default_currency,
 	
-		\network-site\addons\default\modules\network_settings\views\members\form.php
+		form.php
 		
 			CHANGED CODE:
 			
@@ -53,7 +51,7 @@ CHANGES
 					<?php echo $fundraising_default_currency_entity . " " . ...
 					
 					
-		\network-site\addons\default\modules\network_settings\controllers\members.php
+		members.php
 	
 			ADDED CODE: 
 			
@@ -66,14 +64,14 @@ CHANGES
 				
 				->set('fundraising_default_currency_entity', $entities[Settings::get('fundraising_default_currency')])
 	
-		\network-site\addons\default\modules\firesale\controllers\front_cart.php
+		front_cart.php
 		
 			ADDED CODE: 
 			
 				$input['currency_name'] = default_currency; //Inside checkout() function
 	
 	
-		\network-site\addons\default\modules\firesale\models\orders_m.php
+		orders_m.php
 	
 			CHANGED CODE: 
 			
@@ -134,14 +132,14 @@ CHANGES
 						return $orders;
 					}
 	
-		\network-site\addons\default\themes\toucantechV2\css\fundraising-plugin.css
+		fundraising-plugin.css
 		
 			ADDED CODE: 
 			
 				@import url("buttons-multiply-layers.css");
 	
 	
-		\network-site\addons\default\modules\fundraising\views\partials\donate_form_payment.php
+		donate_form_payment.php
 		
 			CHANGE CODE: 
 			
@@ -150,23 +148,23 @@ CHANGES
 					TO: <input type="hidden" name="currency_code" value="<?=default_currency?>">
 
 		
-		\network-site\addons\default\themes\toucantechV2\css\supportus.css
-		\network-site\addons\default\themes\toucantechV2\css\fundraising-plugin.css
+		supportus.css
+		fundraising-plugin.css
 			
 			ADDED CODE: 
 					
 					@import url("../../../modules/fundraising/css/buttons-multiply-layers.css");
 
 					
-		\network-site\addons\default\modules\fundraising\css\supportus.css
-		\network-site\addons\default\modules\network_settings\css\fundraising.css
+		supportus.css
+		fundraising.css
 			
 			ADDED CODE:
 			
 					@import url("../../fundraising/css/buttons-multiply-layers.css");
 					
 		
-		\network-site\addons\default\modules\fundraising\css\fundraising.css
+		fundraising.css
 		
 			
 			ADDED CODE: 
@@ -174,7 +172,7 @@ CHANGES
 					@import url("buttons-multiply-layers.css");
 		
 					
-		\network-site\addons\default\modules\firesale\details.php
+		details.php
 		
 			Added code 1:
 	
@@ -186,11 +184,7 @@ CHANGES
 					
 					if (!$this->db->field_exists('currency_name', $table)) 
 					{
-						$sql =  "ALTER TABLE " . $table . " " . 
-								"	ADD COLUMN currency_name VARCHAR(10) NULL DEFAULT 'GBP' " .
-								"	AFTER shipping";
-						
-						return $this->db->query($sql);		
+						..............
 					}
 					
 					return true;
@@ -213,20 +207,7 @@ CHANGES
 
 					if (count($records) > 0) 
 					{ 
-						$table = $this->db->dbprefix('general_setups');
-						foreach ($records as $key => $record) 
-						{
-							$num = $this->db
-											->select('count(*) as num')
-											->from($table)
-											->where('slug', $record['slug'])
-											->get()
-											->row()
-											->num;		
-							if ($num == 0) {
-								$this->db->insert($table, $record);
-							}
-						}
+						..............
 					}
 				}
 				
@@ -258,7 +239,7 @@ CHANGES
 				}	
 				
 	
-		\network-site\addons\default\modules\network_settings\views\general_settings\partials\menu.php		
+		menu.php		
 			
 			added\changed code: 
 			
@@ -273,7 +254,7 @@ CHANGES
 		
 
 		
-		\network-site\addons\default\modules\network_settings\config\routes.php
+		routes.php
 		
 		
 			added/changed code: 
@@ -284,62 +265,61 @@ CHANGES
 					$route['network_settings/general_settings/terms-conditions'] = 'general_settings/terms_conditions';
 	
 	
-		\network-site\addons\default\modules\network_settings\views\fundraising\setup\index.php
-		
-		
-		deleted code: 
-		
-			<tr>
-				<td><a id="edit-currency-settings" class="edit_icon"></a></td>
-				<td>Default currency</td>
-				<td><input class="form-control" id="disabledInput" type="text" style="width:50px" value="<?=Settings::get('fundraising_default_currency')?>" disabled></td>
-			</tr>			
-			
-			
-			
-			
-		\network-site\addons\default\modules\network_settings\controllers\general_settings.php	
-	
-		deleted code: 
-		
-			note: deleted everything from index function because was totally same with terms_conditions function
-			
-					// Begening of deleted part 
-						$this->load->model('tc_and_policies_m');
-						$this->load->model('bbusers/bbuser_m');
-						$this->form_validation->set_rules(
-							array(
-								'terms_conditions' => array(
-									'field' => 'terms_conditions',
-									'label' => 'Terms & conditions',
-									'rules' => 'trim|required'
-								)
-							)
-						);
-						if ($this->form_validation->run()) {
-							$result = $this->tc_and_policies_m->update_with_slug('terms_conditions', $this->input->post('terms_conditions'));
+		index.php
 
-							if ($result) {
-								$this->session->set_flashdata(array('success' => 'Terms & conditions successfully updated'));
-								redirect('admin-portal/general-settings/terms-conditions');
+			deleted code: 
+			
+				<tr>
+					<td><a id="edit-currency-settings" class="edit_icon"></a></td>
+					<td>Default currency</td>
+					<td><input class="form-control" id="disabledInput" type="text" style="width:50px" value="<?=Settings::get('fundraising_default_currency')?>" disabled></td>
+				</tr>			
+			
+			
+			
+			
+		general_settings.php	
+	
+			deleted code: 
+			
+				note: deleted everything from index function because was totally same with terms_conditions function
+				
+						// Begening of deleted part 
+							$this->load->model('tc_and_policies_m');
+							$this->load->model('bbusers/bbuser_m');
+							$this->form_validation->set_rules(
+								array(
+									'terms_conditions' => array(
+										'field' => 'terms_conditions',
+										'label' => 'Terms & conditions',
+										'rules' => 'trim|required'
+									)
+								)
+							);
+							if ($this->form_validation->run()) {
+								$result = $this->tc_and_policies_m->update_with_slug('terms_conditions', $this->input->post('terms_conditions'));
+
+								if ($result) {
+									$this->session->set_flashdata(array('success' => 'Terms & conditions successfully updated'));
+									redirect('admin-portal/general-settings/terms-conditions');
+								}
+								else {
+									$this->session->set_flashdata('error', 'An error occurred while updating the terms & conditions');
+								}
 							}
-							else {
-								$this->session->set_flashdata('error', 'An error occurred while updating the terms & conditions');
+							$item = $this->tc_and_policies_m->get_by_slug('terms_conditions');
+							if($item->last_updated_by) {
+								$item->last_updated_by = $this->bbuser_m->get($item->last_updated_by);
 							}
-						}
-						$item = $this->tc_and_policies_m->get_by_slug('terms_conditions');
-						if($item->last_updated_by) {
-							$item->last_updated_by = $this->bbuser_m->get($item->last_updated_by);
-						}
-						$this->data['content'] = $item->value;
-						$this->data['updated_on'] = $item->updated_on;
-						$this->data['last_updated_by'] = $item->last_updated_by;
-						$this->data['title'] = 'General Settings';
-						$this->template->append_metadata($this->load->view('fragments/wysiwyg', $this->data, TRUE));
-						$this->template
-							->title('Terms & conditions', ' Admin Portal')
-							->build('general_settings/index', $this->data);
-					//END of deleted part
+							$this->data['content'] = $item->value;
+							$this->data['updated_on'] = $item->updated_on;
+							$this->data['last_updated_by'] = $item->last_updated_by;
+							$this->data['title'] = 'General Settings';
+							$this->template->append_metadata($this->load->view('fragments/wysiwyg', $this->data, TRUE));
+							$this->template
+								->title('Terms & conditions', ' Admin Portal')
+								->build('general_settings/index', $this->data);
+						//END of deleted part
 					
 			added/changed code: 
 
@@ -370,42 +350,13 @@ CHANGES
 							)
 						);		
 
-						//Update/save value into database and checking process
-						$result = true;
-						if ($this->form_validation->run()) {
-							$default_currency = $this->input->post('default_currency');
-							$default_currency_html_entity = ($entities[$default_currency] == '') 			
-																		? $default_currency 
-																		: $entities[$default_currency];			
-							$result = $this->general_setups_m->update_with_slug('default_currency', $this->input->post('default_currency'));
-							if ($result) $result = $this->general_setups_m->update_with_slug('default_currency_html_entity', $default_currency_html_entity);
-							if ($result) {
-								$this->session->set_flashdata(array('success' => 'General setups are updated!'));
-								redirect('admin-portal/general-settings/general-setups');
-							}
-							else {
-								$this->session->set_flashdata('error', 'An error occurred while updating');
-							}
-						}
-						
-						//Get currencies from \network-site\addons\shared_addons\libraries\Options.php file 
-						foreach ($currencies as $int_sign => &$currency_name) $currency_name = $int_sign . " - " . $currency_name;
-						$default_currency_selected = $this->general_setups_m->get_by_slug('default_currency')->value;			
-
-						
-						//Get template
-						$this->data['title'] = 'General setup';		
-						$this->template
-							->set('currencies', $currencies)
-							->set('default_currency_selected', $default_currency_selected)
-							->title('General setup', ' Admin Portal')
-							->build('general_settings/general_setups', $this->data);
+						................
 					}				
 								
 				
 					
 		
-		\network-site\addons\shared_addons\libraries\Options.php
+		Options.php
 		
 			added code: 
 			
@@ -423,7 +374,7 @@ CHANGES
 				}
 	
 	
-		\network-site\system\cms\core\MY_Controller.php
+		MY_Controller.php
 		
 		
 			added code: 
@@ -435,7 +386,7 @@ CHANGES
 	
 
 
-		\network-site\addons\default\modules\fundraising\views\plugin\sidebar.php
+		sidebar.php
 		
 		
 			added/changed code at 9 places: 
@@ -446,7 +397,7 @@ CHANGES
 				</div>
 				
 		
-		\network-site\addons\default\modules\fundraising\views\partials\active_campaigns.php
+		active_campaigns.php
 		
 		
 			added/changed code at 7 places: 
@@ -456,68 +407,70 @@ CHANGES
 							<div class="currency">	</div>
 						</div>	
 			
-		\network-site\addons\default\modules\fundraising\views\partials\news_tagged_campaigns.php
-		\network-site\addons\default\modules\fundraising\views\supportus.php
-		\network-site\addons\default\modules\network_settings\views\content\preview.php
-		\network-site\addons\default\modules\network_settings\views\fundraising\campaigns\snapshot.php
-		\network-site\addons\default\modules\network_settings\views\fundraising\donations\load_more_donation.php
-		\network-site\addons\default\modules\network_settings\views\fundraising\donations\member_profile.php
-		\network-site\addons\default\modules\network_settings\views\fundraising\index.php
-		\network-site\addons\default\modules\network_settings\views\fundraising\partials\child_donations_table.php
-		\network-site\addons\default\modules\network_settings\views\fundraising\partials\sub_campaigns_table.php
-		\network-site\addons\default\modules\network_settings\views\fundraising\rewards\index.php
-		\network-site\addons\default\modules\network_settings\views\fundraising\setup\index.php
-		\network-site\addons\default\modules\fundraising\views\partials\gift_aid_final.php
-		\network-site\addons\default\modules\fundraising\views\partials\active_campaigns.php
-		\network-site\addons\default\modules\fundraising\views\partials\campaign.php
-		\network-site\addons\default\modules\fundraising\views\partials\donate_form.php
-		\network-site\addons\default\modules\fundraising\views\partials\give_online_second.php
-		\network-site\addons\default\modules\fundraising\views\partials\give_online.php
-		\network-site\addons\default\modules\bbevents\views\event_sign_up2.php
-		\network-site\addons\default\modules\fundraising\views\mysupport.php
-		\network-site\addons\default\modules\firesale\views\cart.php
+			
+			
+		news_tagged_campaigns.php
+		supportus.php
+		content\preview.php
+		fundraising\campaigns\snapshot.php
+		fundraising\donations\load_more_donation.php
+		fundraising\donations\member_profile.php
+		fundraising\index.php
+		fundraising\partials\child_donations_table.php
+		fundraising\partials\sub_campaigns_table.php
+		fundraising\rewards\index.php
+		fundraising\setup\index.php
+		gift_aid_final.php
+		active_campaigns.php
+		campaign.php
+		donate_form.php
+		give_online_second.php
+		give_online.php
+		event_sign_up2.php
+		mysupport.php
+		cart.php
 		
 		
 			CHANGE: FROM: £ TO: <?=default_currency_html_entity?>
 			
 
 		
-		\network-site\addons\default\modules\network_settings\views\content\tables\event-ticket-type.php
-		\network-site\addons\default\modules\bbevents\views\registration_success.php
-		\network-site\addons\default\modules\bbevents\controllers\bbevents.php
-		\network-site\addons\default\modules\bbevents\models\bbevent_m.phpű
-		\network-site\addons\default\modules\firesale\details.php
-		\network-site\addons\default\modules\fundraising\controllers\fundraising.php
-		\network-site\addons\default\modules\network_settings\controllers\content.php
+		event-ticket-type.php
+		registration_success.php
+		bbevents.php
+		bbevent_m.phpű
+		details.php
+		fundraising.php
+		content.php
 		
 		
 			CHANGE: FROM: "£" TO: default_currency_html_entity
 
 		
-		\network-site\addons\default\modules\fundraising\views\partials\give_form.php
-		\network-site\addons\default\modules\fundraising\views\partials\give_blank_form.php
-		\network-site\addons\default\modules\fundraising\views\partials\gift_form.php		
+		give_form.php
+		give_blank_form.php
+		gift_form.php		
 			
 
 			CHANGE: FROM: "£ GBP" TO: default_currency_html_entity ." " . default_currency
 					
 					
 					
-		\network-site\addons\default\modules\jobs\models\jobs_m.php
+		jobs_m.php
 		
 		
 			CHANGE CODE: FROM:  if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $keyword)) 
 						 TO :  if (preg_match('/[\'^£$€%&*()}{@#~?><>,|=_+¬-]/', $keyword)) 
 						 
 						 
-		\network-site\addons\default\modules\network_settings\controllers\invite_import.php
+		invite_import.php
 		
 		
 			CHANGE CODE: FROM:  '£200 Deposit '  => array(
 						 TO :   default_currency_html_entity . '200 Deposit '  => array(
 						 
 						 
-		\network-site\addons\default\modules\fundraising\models\campaigns_m.php
+		campaigns_m.php
 		
 			
 			CHANGE CODE: FROM:
@@ -536,7 +489,7 @@ CHANGES
 								$sql .= ", CONCAT(campaign_widget_quick5_text, ' (', '" . default_currency_html_entity . "' , campaign_widget_quick5_amount,')') AS customDonationText5";
 	
 	
-		\network-site\addons\default\modules\fundraising\details.php
+		details.php
 		
 		
 			CHANGE CODE: FROM: 
